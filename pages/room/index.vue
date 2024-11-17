@@ -6,17 +6,18 @@ const roomsList = ref([]);
 const apiUrl = "https://nuxr3.zeabur.app/api/v1/rooms";
 
 fetch(apiUrl)
-  .then((response) => {
+  .then(response => {
     if (!response.ok) {
       throw new Error("取得房型資料失敗");
     }
     return response.json();
   })
-  .then((data) => {
+  .then(data => {
     const { result } = data;
     roomsList.value = result;
+    
   })
-  .catch((error) => {
+  .catch(error => {
     console.error("發生錯誤:", error);
   });
 </script>
@@ -26,7 +27,7 @@ fetch(apiUrl)
   <div class="container mt-4">
     <div class="row justify-content-center gy-3">
       <div class="col-8 col-md-6 col-lg-3" v-for="room in roomsList">
-        <div class="card h-100 shadow-sm" @click="router.push('/room/_id')">
+        <div class="card h-100 shadow-sm" @click="router.push(`/room/${room._id}`)">
           <img :src="room.imageUrl" class="card-img-top" alt="Room Image" />
           <div class="card-body d-flex flex-column">
             <h3 class="card-title">{{ room.name }}</h3>

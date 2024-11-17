@@ -1,15 +1,15 @@
 <!-- /pages/[...slug].vue -->
 <script setup>
 const route = useRoute();
-const event = useRequestEvent(); // 獲取當前請求的事件
 
-// 設定 HTTP 404 狀態碼
-setResponseStatus(event, 404);
+
+const page = ref(route.fullPath);
 </script>
 
 <template>
     <h1>404 Not Found</h1>
-    <p>你所請求的頁面：{{ route.params.slug.join('/') }}，不存在。</p>
+    <p>你所請求的頁面：{{ page }}，不存在。</p>
+    <NuxtLink class="btn btn-primary" to="/">返回首頁</NuxtLink>
 </template>
 
 <style scoped>
